@@ -1,0 +1,31 @@
+extend type Query {
+    getUsersByFilter(request: GetUsersRequest!): GetUsersResponse!
+}
+
+input GetUsersRequest {
+    user_ids: [UserId!]
+    names: [String!]
+}
+
+type GetUsersResponse {
+    users: [User!]!
+}
+
+type User {
+    user_id: UserId!
+    name: String!
+}
+
+extend type Mutation {
+    registerUser(request: RegisterUserRequest!): RegisterUserResponse!
+}
+
+input RegisterUserRequest {
+    name: String!
+}
+
+type RegisterUserResponse {
+    user_id: UserId!
+}
+
+scalar UserId

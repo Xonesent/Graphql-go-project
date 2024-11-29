@@ -1,0 +1,44 @@
+extend type Query {
+    getOrdersByFilter(request: GetOrdersRequest!): GetOrdersResponse!
+}
+
+input GetOrdersRequest{
+    orderIds: [OrderId!]
+    userIds: [UserId!]
+    productIds: [ProductId!]
+    prices: [Int!]
+}
+
+type GetOrdersResponse{
+    orders: [Order!]!
+}
+
+type Order {
+    orderId: OrderId
+    userId: UserId
+    ProductId: ProductId
+    Price: Int
+}
+
+extend type Mutation {
+    createOrder(request: CreateOrderRequest!): CreateOrderResponse!
+}
+
+input CreateOrderRequest{
+    price: Int!
+    productId: ProductId! @validateProdutId
+}
+
+type CreateOrderResponse{
+    orderId: OrderId!
+}
+
+extend type Subscription {
+    monitorOrders : Order!
+}
+
+scalar OrderId
+scalar ProductId
+scalar UserId
+
+directive @validateProdutId on INPUT_FIELD_DEFINITION

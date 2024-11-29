@@ -1,0 +1,16 @@
+# Needed for query, mutation and subscription extension in other *.graphql files
+
+type Query
+type Mutation
+type Subscription
+
+#directive @goModel(model: String, models: [String!]) on OBJECT | INPUT_OBJECT | SCALAR | ENUM | INTERFACE | UNION
+#directive @goField(forceResolver: Boolean, name: String, omittable: Boolean) on INPUT_FIELD_DEFINITION | FIELD_DEFINITION
+#Есть директивы, работающие на уровне gqlgen, без необходимости в имплементации
+#Директива @goModel - используется для управления тем, как типы в GraphQL-схеме связываются с типами в Go
+#- model: Указывает полный путь (с пакетом) к Go-типу, который соответствует этому GraphQL-типу.
+#- models: Список Go-типов (вместо одного типа), которые можно ассоциировать с этим GraphQL-типом.
+#Директива @goField - используется для управления тем, как поля GraphQL-типов сопоставляются с полями Go-структур
+#- forceResolver: Если установлено в true, заставляет gqlgen создавать резолвер для этого поля, даже если он может быть определен напрямую через привязку к структуре Go.
+#- name: Указывает имя поля в Go-структуре, если оно отличается от имени в GraphQL-схеме.
+#- omittable: Указывает, что поле может быть пропущено (например, оно может быть опциональным в GraphQL).

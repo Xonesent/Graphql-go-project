@@ -1,0 +1,35 @@
+extend type Query {
+    getProductsByFilter(request: GetProductsRequest!): GetProductsResponse
+}
+
+input GetProductsRequest{
+    productIds: [ProductId!]
+    items: [String!]
+    attributes: Map
+}
+
+type GetProductsResponse{
+    products: [FullProduct!]!
+}
+
+type FullProduct {
+    product_id: ProductId!
+    item: String!
+    attributes: Map
+}
+
+extend type Mutation {
+    createProduct(request: CreateProductRequest!): CreateProductResponse
+}
+
+input CreateProductRequest{
+    item: String!
+    attributes: Map
+}
+
+type CreateProductResponse{
+    product_id: ProductId!
+}
+
+scalar ProductId
+scalar Map
